@@ -1,7 +1,12 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from .models import Product
 
 
 def index(request):
-    return HttpResponse('Солнечные электростанции')
+    products = Product.objects.filter(pk__lte=6)
+    context = {
+        'title': 'Главная',
+        'products': products,
+    }
+    return render(request, 'solar_panel/index.html', context)
 

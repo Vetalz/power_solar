@@ -1,3 +1,18 @@
 from django.contrib import admin
+from .models import Photo, Product
 
-# Register your models here.
+
+class PhotoAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'product')
+    list_display_links = ('title',)
+
+
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'power', 'area', 'region')
+    list_display_links = ('title',)
+
+
+admin.site.register(Photo, PhotoAdmin)
+admin.site.register(Product, ProductAdmin)
+
+admin.site.site_header = 'SolarEnergy'

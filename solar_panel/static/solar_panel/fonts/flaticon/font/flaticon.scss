@@ -1,0 +1,65 @@
+$flaticon-font: "flaticon";
+
+@font-face {
+    font-family: $flaticon-font;
+    src: url("./flaticon.ttf?0fb9c2ab0c7ab24e6f1236dff1c8dc46") format("truetype"),
+url("./flaticon.woff?0fb9c2ab0c7ab24e6f1236dff1c8dc46") format("woff"),
+url("./flaticon.woff2?0fb9c2ab0c7ab24e6f1236dff1c8dc46") format("woff2"),
+url("./flaticon.eot?0fb9c2ab0c7ab24e6f1236dff1c8dc46#iefix") format("embedded-opentype"),
+url("./flaticon.svg?0fb9c2ab0c7ab24e6f1236dff1c8dc46#flaticon") format("svg");
+}
+
+i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
+    font-family: flaticon !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+$flaticon-map: (
+    "document": "\f101",
+    "handshake": "\f102",
+    "solar-panel": "\f103",
+    "solar-panel-1": "\f104",
+    "recycling-plant": "\f105",
+    "home": "\f106",
+    "document-1": "\f107",
+    "solar-energy": "\f108",
+    "solar-energy-1": "\f109",
+    "solar-cell": "\f10a",
+);
+
+.flaticon-document:before {
+    content: map-get($flaticon-map, "document");
+}
+.flaticon-handshake:before {
+    content: map-get($flaticon-map, "handshake");
+}
+.flaticon-solar-panel:before {
+    content: map-get($flaticon-map, "solar-panel");
+}
+.flaticon-solar-panel-1:before {
+    content: map-get($flaticon-map, "solar-panel-1");
+}
+.flaticon-recycling-plant:before {
+    content: map-get($flaticon-map, "recycling-plant");
+}
+.flaticon-home:before {
+    content: map-get($flaticon-map, "home");
+}
+.flaticon-document-1:before {
+    content: map-get($flaticon-map, "document-1");
+}
+.flaticon-solar-energy:before {
+    content: map-get($flaticon-map, "solar-energy");
+}
+.flaticon-solar-energy-1:before {
+    content: map-get($flaticon-map, "solar-energy-1");
+}
+.flaticon-solar-cell:before {
+    content: map-get($flaticon-map, "solar-cell");
+}

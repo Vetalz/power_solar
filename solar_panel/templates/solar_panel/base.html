@@ -9,6 +9,7 @@
   <title>SolarPower. - {%block title %}{% endblock %}</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fontisto@v3.0.4/css/fontisto/fontisto.min.css">
   <link rel="stylesheet" href="{% static 'solar_panel/css/flaticon.css' %}">
   <link rel="stylesheet" href="{% static 'solar_panel/css/style.css' %}">
@@ -17,7 +18,7 @@
   <div class="container py-3">
     <div class="row justify-content-between">
       <div class="col">
-        <a class="navbar-brand" href="index.html">Power<span>Solar.</span></a>
+        <a class="navbar-brand" href="{% url 'home' %}">Solar<span>Future.</span></a>
       </div>
       <div class="col d-flex justify-content-end">
         <div class="social-media">
@@ -44,12 +45,12 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarToggler">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active"><a href="index.html" class="nav-link">Главная</a></li>
-          <li class="nav-item"><a href="#" class="nav-link btn-request" data-goto=".service">Услуги</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">Наши проекты</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">Оборудование</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">Зеленый тариф</a></li>
-          <li class="nav-item"><a href="contact.html" class="nav-link">Контакты</a></li>
+          <li class="nav-item {% if title == 'Главная' %}active {% endif %}"><a href="{% url 'home' %}" class="nav-link">Главная</a></li>
+          <li class="nav-item"><a href="{% url 'home' %}#service" class="nav-link btn-request" data-goto=".service">Услуги</a></li>
+          <li class="nav-item {% if title == 'Наши проекты' %}active {% endif %}"><a href="{% url 'product' %}" class="nav-link">Наши проекты</a></li>
+<!--          <li class="nav-item"><a href="#" class="nav-link">Оборудование</a></li>-->
+          <li class="nav-item"><a href="{%url 'green_rate' %}" class="nav-link">Зелёный тариф</a></li>
+          <li class="nav-item {% if title == 'Контакты' %}active {% endif %}"><a href="{% url 'contact' %}" class="nav-link">Контакты</a></li>
         </ul>
       </div>
     </div>
@@ -76,17 +77,17 @@
         </div>
         <div class="col-md-3">
           <h4>Наши услуги</h4>
-          <p><a href="#">Солнечные электростанции для дома</a></p>
-          <p><a href="#">Солнечные электростанции для бизнеса</a></p>
+          <p><a href="{% url 'ses_home' %}">Солнечные электростанции для дома</a></p>
+          <p><a href="{% url 'ses_business' %}">Солнечные электростанции для бизнеса</a></p>
         </div>
         <div class="col-md-3">
           <h4>Контактная информация</h4>
           <p>г. Кривой Рог, ул. Гетьманская, 110</p>
           <p><a href="tel:380961111111">+38 (096) 111-11-11</a></p>
-          <p>solarpower@gmail.com</p>
+          <p>solar.future.tech@gmail.com</p>
         </div>
-        <div class="col-md-3 d-flex justify-content-center">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2673.9084331082418!2d33.38135041608838!3d47.91880917920666!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40db209e34cb356b%3A0xbb2d052cb1e80f43!2z0YPQuy4g0JPQtdGC0YzQvNCw0L3RgdC60LDRjywgMTEwLCDQmtGA0LjQstC-0Lkg0KDQvtCzLCDQlNC90LXQv9GA0L7Qv9C10YLRgNC-0LLRgdC60LDRjyDQvtCx0LvQsNGB0YLRjCwgNTAwMDA!5e0!3m2!1sru!2sua!4v1631287364903!5m2!1sru!2sua" width="250" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        <div class="col-md-3">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2673.9084331082418!2d33.38135041608838!3d47.91880917920666!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40db209e34cb356b%3A0xbb2d052cb1e80f43!2z0YPQuy4g0JPQtdGC0YzQvNCw0L3RgdC60LDRjywgMTEwLCDQmtGA0LjQstC-0Lkg0KDQvtCzLCDQlNC90LXQv9GA0L7Qv9C10YLRgNC-0LLRgdC60LDRjyDQvtCx0LvQsNGB0YLRjCwgNTAwMDA!5e0!3m2!1sru!2sua!4v1631287364903!5m2!1sru!2sua" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </div>
       </div>
     </div>
@@ -99,8 +100,10 @@
           integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
           crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
   <script src="{% static 'solar_panel/js/countfect.min.js' %}"></script>
   <script src="{% static 'solar_panel/js/scroll.js' %}"></script>
   <script src="{% static 'solar_panel/js/calculate_v2.js' %}"></script>
+  <script src="{% static 'solar_panel/js/slick_slider.js' %}"></script>
 </body>
 </html>

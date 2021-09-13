@@ -1,0 +1,54 @@
+{% extends 'solar_panel/base.html' %}
+{% load static %}
+
+{% block title %}
+  {{ title }}
+{% endblock %}
+
+{% block main %}
+  <div class="container-fluid contact_screen">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'home' %}">Главная</a></li>
+          <li class="breadcrumb-item active-crumb" aria-current="page">Электростанции для дома</li>
+        </ol>
+      </nav>
+      <h1>Частные солнечные электростанции</h1>
+    </div>
+  </div>
+  <section class="container mt-5 mb-5 ses-home">
+    <div class="row justify-content-center mb-3">
+      <div class="col-md-7 text-center">
+        <span class="subheading">Для дома</span>
+        <h2 class="mb-4">Солнечные электростанции под <a href="{% url 'green_rate' %}" class="green">зелёный тариф</a> с гарантированной прибылью до <span class="profit">$7500</span> в год!</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-7">
+        <p>Наша компания предоставляет весь спектр услуг по установке солнечных электростанций.</p>
+        <p>Специалисты компании бесплатно проконсультируют вас, а инженер в обязательном порядке выполнит
+          замеры вашего участка и определит правильное расположение солнечной электростанции, чтобы
+          электростанция работала максимально эффективно, тем самым принося вам стабильный пассивный доход!</p>
+        <p>Мы полностью помогаем нашим клиентам в документальном оформлении и сопровождении сделки: от подбора
+          и установки оборудования до заключения договора под зелёный тариф!</p>
+        <div class="text-center mt-5 mb-5">
+          <a href="#" data-goto=".form-bg"
+             class="btn btn-warning btn-request">Бесплатная консультация</a>
+        </div>
+      </div>
+      <div class="col-md-5 d-none d-md-block">
+        <img src="{% static 'solar_panel/images/solar_panel.jpg' %}" alt="solar_panel">
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <h5 class="mt-3 mb-1 text-center">Принцип работы в частных домах</h5>
+        <img src="{% static 'solar_panel/images/scheme.png' %}" alt="">
+      </div>
+    </div>
+  </section>
+  {% include 'solar_panel/include/calculate.html' %}
+  {% include 'solar_panel/include/form.html' %}
+  {% include 'solar_panel/include/benefits.html' %}
+{% endblock %}

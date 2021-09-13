@@ -1,0 +1,93 @@
+{% extends 'solar_panel/base.html' %}
+{% load static %}
+
+{% block title %}
+  {{ title }}
+{% endblock %}
+
+{% block main %}
+  <div class="container-fluid contact_screen">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'home' %}">Главная</a></li>
+          <li class="breadcrumb-item"><a href="{% url 'product' %}">Проекты</a></li>
+          <li class="breadcrumb-item active-crumb" aria-current="page">Сетевая СЭС 3000кВт</li>
+        </ol>
+      </nav>
+      <h1>Сетевая СЭС 3000кВт</h1>
+    </div>
+  </div>
+  <section class="container mt-5 mb-5">
+    <div class="row">
+      <div class="col-md-9">
+        <div id="carouselProduct" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselProduct" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselProduct" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselProduct" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="{% static 'solar_panel/images/work-1.jpg' %}" class="d-block w-100" alt="">
+            </div>
+            <div class="carousel-item">
+              <img src="{% static 'solar_panel/images/work-1.jpg' %}" class="d-block w-100" alt="">
+            </div>
+            <div class="carousel-item">
+              <img src="{% static 'solar_panel/images/work-1.jpg' %}" class="d-block w-100" alt="">
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselProduct"  data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Предыдущий</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselProduct"  data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Следующий</span>
+          </button>
+        </div>
+      </div>
+      <div class="col-md-3 d-flex flex-column justify-content-around mt-2">
+        <h2>Характеристики:</h2>
+        <h6><a href="{% url 'green_rate' %}" class="green">Подключён зелёный тариф</a></h6>
+        <h6>Мощность:</h6>
+        <p>3000 кВт</p>
+        <h6>Генерация за год:</h6>
+        <p>500000 кВт</p>
+        <h6>Годовой доход:</h6>
+        <p>$100000</p>
+        <h6>Расположение:</h6>
+        <p>Днепропетровская область</p>
+        <div class="text-center">
+            <a href="#" data-goto=".form-bg" class="btn btn-warning btn-request">Узнать стоимость</a>
+          </div>
+      </div>
+    </div>
+  </section>
+  <section class="container mt-5 mb-5">
+    <div class="row">
+      <div class="text-center">
+          <span class="subheading"></span>
+          <h2 class="mb-4">Другие наши проекты</h2>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 slick-slider">
+        {% for product in products %}
+        <div class="card mt-3 text-center ms-2">
+          <img src="{{ product.main_photo.photo.url }}" class="card-img-top" alt="{{ product.title }}">
+          <div class="card-body">
+            <h5 class="card-title">СЭС {{ product.power|floatformat:"0" }} кВт</h5>
+            <p class="card-text">Занимаемая площадь {{ product.area|floatformat:"0" }} кв.м</p>
+            <p class="card-text">{{ product.region }} область</p>
+            <a href="#" class="btn btn-warning">Подробнее</a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+  {% include 'solar_panel/include/form.html' %}
+  {% include 'solar_panel/include/benefits.html' %}
+{% endblock %}

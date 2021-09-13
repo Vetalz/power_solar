@@ -1,0 +1,46 @@
+{% extends 'solar_panel/base.html' %}
+{% load static %}
+
+{% block title %}
+  {{ title }}
+{% endblock %}
+
+{% block main %}
+  <div class="container-fluid contact_screen">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'home' %}">Главная</a></li>
+          <li class="breadcrumb-item active-crumb" aria-current="page">Электростанции для бизнеса</li>
+        </ol>
+      </nav>
+      <h1>Солнечные электростанции<br>для бизнеса</h1>
+    </div>
+  </div>
+  <section class="container mt-5 mb-5 ses-home">
+    <div class="row justify-content-center mb-3">
+      <div class="col-md-7 text-center">
+        <span class="subheading">Для бизнеса</span>
+        <h2 class="mb-4">Автономные солнечные электростанции для бизнеса</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-7">
+        <p>В то время, когда стоимость электроэнергии для предприятий постоянно повышается,
+          мы предлагаем выгодное решение частным компаниям, которые потребляют большое количество электроэнергии.</p>
+        <p>Строительство автономной солнечной электростанции позволит вашему бизнесу максимально сократить потребление
+          электроэнергии в дневное время.</p>
+        <p>Платите меньше на постоянной основе, несмотря на повышение тарифов!</p>
+        <p>Специалисты компании бесплатно проконсультируют вас, а инженер в обязательном порядке выполнит замеры
+          и определит правильное расположение солнечной электростанции,
+          чтобы электростанция работала максимально эффективно!</p>
+        <p>Остались вопросы? Свяжитесь с нами!</p>
+      </div>
+      <div class="col-md-5">
+        <img src="{% static 'solar_panel/images/solar_panel_business.jpg' %}" alt="solar_panel">
+      </div>
+    </div>
+  </section>
+  {% include 'solar_panel/include/form.html' %}
+  {% include 'solar_panel/include/benefits.html' %}
+{% endblock %}

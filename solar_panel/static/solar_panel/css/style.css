@@ -124,6 +124,23 @@ a.navbar-brand:hover {
     background-color: #c69500;
     border-color: #c69500;
 }
+
+.form-main {
+    background-color: #4a8e35;
+    border-radius: .25rem;
+}
+
+.form-main p {
+    color: #fff;
+}
+
+.green {
+    color: #4a8e35;
+}
+
+.green:hover {
+    color: #fdbe34;
+}
 /*end main_screen*/
 
 /*services*/
@@ -351,5 +368,95 @@ input[type=range]::-ms-thumb {
 }
 /*end footer*/
 
+/*contact*/
+.contact_screen {
+    background-image: url('../images/bg_contact.jpg');
+    background-size: cover;
+    height: 100%;
+    color: #fff;
+    padding-top: 15vh;
+    padding-bottom: 10vh;
+    text-shadow: 0px 0px 10px rgb(0 0 0);
+}
 
+.contact_screen a{
+    color: #fff;
+    text-decoration: none;
 
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: ">";
+    color: #fff;
+}
+
+.active-crumb {
+    color: #fdbe34;
+}
+
+.contact_screen h1 {
+    text-transform: uppercase;
+}
+
+@media (max-width: 720px) {
+    .contact_screen {
+        padding-top: 10vh;
+        padding-bottom: 5vh;
+    }
+}
+/*end contact*/
+/*products*/
+.card {
+    width: 18rem;
+}
+
+.card-img-top {
+    height: 196px;
+}
+/*end product*/
+/*ses home*/
+.profit {
+    color: #4a8e35;
+}
+
+.ses-home img {
+    width: 100%;
+}
+/*end ses home*/
+/*single product*/
+.slick-slider {
+    position: relative;
+}
+
+.slick-slider .slick-arrow {
+    position: absolute;
+    top:50%;
+    z-index: 10;
+}
+
+.slick-slider .slick-prev {
+    left: 0;
+}
+
+.slick-slider .slick-next {
+    right: 0;
+}
+
+.slick-slider button {
+    padding: 0;
+    border: none;
+    font: inherit;
+    color: #fff;
+    font-size: 24px;
+    background-color: #fdbe34;
+    cursor: pointer;
+    border-radius: .25rem;
+    width: 2rem;
+    height: 2rem;
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    background-color: #fdbe34;
+    border-radius: .25rem;
+}
+/*end single product*/

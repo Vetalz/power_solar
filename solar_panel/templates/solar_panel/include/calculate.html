@@ -1,0 +1,64 @@
+{% load static %}
+<section class="container mt-5">
+    <div class="row justify-content-center mb-4 pb-3">
+      <div class="col-md-7 text-center">
+        <span class="subheading">Калькулятор</span>
+        <h2>Рассчитайте прибыль от приватной СЕС по программе <a href="{% url 'green_rate' %}" class="green">зелёного тарифа</a></h2>
+      </div>
+    </div>
+    <div class="row d-flex">
+      <div class="col-md-5">
+        <h3 class="text-center">Исходные данные</h3>
+        <label for="region">Выберите область:</label>
+        <select class="form-select" id="region">
+          <option value="0">-----</option>
+          <option value="kiev">Киевская</option>
+          <option value="odessa">Одесская</option>
+          <option value="dnieper">Днепропетровская</option>
+          <option value="chernivtsi">Черновецкая</option>
+          <option value="kharkov">Харьковская</option>
+          <option value="chernihiv">Черниговская</option>
+          <option value="zhytomyr">Житомирская</option>
+          <option value="poltava">Полтавская</option>
+          <option value="kherson">Херсонская</option>
+          <option value="zaporizhzhia">Запорожская</option>
+          <option value="luhansk">Луганская</option>
+          <option value="donetsk">Донецкая</option>
+          <option value="vinnytsia">Винницкая</option>
+          <option value="nikolaev">Николаевская</option>
+          <option value="kirovograd">Кировоградская</option>
+          <option value="sumy">Сумская</option>
+          <option value="lviv">Львовская</option>
+          <option value="cherkasy">Черкасская</option>
+          <option value="khmelnitsky">Хмельницкая</option>
+          <option value="volyn">Волынская</option>
+          <option value="rivne">Ровенская</option>
+          <option value="ivano_frankivsk">Ивано-Франковская</option>
+          <option value="ternopil">Тернопольская</option>
+          <option value="uzhgorod">Закарпатская</option>
+        </select>
+        <label for="budget_value" class="form-label mt-4">Каким бюджетом вы располагаете:</label>
+        <input type="range" class="form-range" id="budget_value" value="10000" min="10000" max="50000" step="100" oninput="range_value.value=value">
+        <div class="power_value">
+          <input class="mt-2 mb-3" type="number" id="range_value" min="10000" max="50000" value="10000" step="100" oninput="budget_value.value=value">
+          <span>$</span>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+      <div class="col-md-5">
+        <h3 class="text-center">Результат работы станции за год</h3>
+        <p class="calc_warning">Зеленый тариф распространяется на станции мощностью до 40кВт</p>
+        <p><span>Мощность станции:  </span><span class="calc fw-bold" id="power">0</span><span> кВт</span></p>
+        <p><span>Количество панелей:  </span><span class="calc fw-bold" id="count_panel">0</span><span> шт</span></p>
+        <p><span>Площадь станции:  </span><span class="calc fw-bold" id="square_station">0</span><span> м.кв</span></p>
+        <p><span>Генерация за год:  </span><span class="calc fw-bold" id="generation_year">0</span><span> кВт*ч</span></p>
+        <p><span>Ежегодный доход:  </span><span class="calc fw-bold" id="profit">0</span><span> $*</span></p>
+        <p><span>Срок окупаемости:  </span><span class="calc fw-bold" id="payback">0</span><span> год</span></p>
+        <p>*при расчете учтен налог на доход в размере 19,5%</p>
+      </div>
+    </div>
+    <div class="row justify-content-center mb-5">
+      <p class="col-md-7 text-center">Более точный просчет, подбор оборудования и формирование стоимости необходимой солнечной
+                            электростанции помогут рассчитать наши менеджеры.</p>
+    </div>
+  </section>

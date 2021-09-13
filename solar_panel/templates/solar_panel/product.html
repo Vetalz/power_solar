@@ -1,0 +1,37 @@
+{% extends 'solar_panel/base.html' %}
+{% load static %}
+
+{% block title %}
+  {{ title }}
+{% endblock %}
+
+{% block main %}
+  <div class="container-fluid contact_screen">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'home' %}">Главная</a></li>
+          <li class="breadcrumb-item active-crumb" aria-current="page">Проекты</li>
+        </ol>
+      </nav>
+      <h1>Наши проекты</h1>
+    </div>
+  </div>
+  <section class="container mt-5 mb-5">
+    <div class="row justify-content-around">
+      {% for product in products %}
+      <div class="card mt-3 text-center">
+        <img src="{{ product.main_photo.photo.url }}" class="card-img-top" alt="{{ product.title }}">
+        <div class="card-body">
+          <h5 class="card-title">СЭС {{ product.power|floatformat:"0" }} кВт</h5>
+          <p class="card-text">Занимаемая площадь {{ product.area|floatformat:"0" }} кв.м</p>
+          <p class="card-text">{{ product.region }} область</p>
+          <a href="#" class="btn btn-warning">Подробнее</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% include 'solar_panel/include/form.html' %}
+  {% include 'solar_panel/include/benefits.html' %}
+{% endblock %}

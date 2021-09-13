@@ -128,7 +128,7 @@
   <section class="container-fluid">
     <div class="row ">
       {% for product in products %}
-      <a href="#" class="col-md-4 p-0 work-btn">
+      <a href="{{ product.get_absolute_url }}" class="col-md-4 p-0 work-btn">
         <div class="work d-flex flex-column justify-content-end" style="background-image: url({{ product.main_photo.photo.url }});">
           <div class="px-3">
             <div class="mb-3 work-text">

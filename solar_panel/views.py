@@ -1,9 +1,9 @@
-from django.shortcuts import render
-from .models import Product
+from django.shortcuts import render, get_object_or_404
+from .models import Product, Photo
 
 
 def index(request):
-    products = Product.objects.filter(pk__lte=6)
+    products = Product.objects.all()[0:6]
     context = {
         'title': 'Главная',
         'products': products,
@@ -27,11 +27,13 @@ def product(request):
     return render(request, 'solar_panel/product.html', context)
 
 
-def single_product(request):
-    products = Product.objects.all()
+def single_product(request, product_slug):
+    current_product = get_object_or_404(Product, slug=product_slug)
+    products = Product.objects.exclude(slug=product_slug)
     context = {
         'products': products,
-        'title': 'Конкретный проект'
+        'current_product': current_product,
+        'title': current_product.title,
     }
     return render(request, 'solar_panel/single_product.html', context)
 

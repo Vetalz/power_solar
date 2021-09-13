@@ -24,9 +24,9 @@
         <img src="{{ product.main_photo.photo.url }}" class="card-img-top" alt="{{ product.title }}">
         <div class="card-body">
           <h5 class="card-title">СЭС {{ product.power|floatformat:"0" }} кВт</h5>
-          <p class="card-text">Занимаемая площадь {{ product.area|floatformat:"0" }} кв.м</p>
+          <p class="card-text">Занимаемая площадь <br>{{ product.area|floatformat:"0" }} кв.м</p>
           <p class="card-text">{{ product.region }} область</p>
-          <a href="#" class="btn btn-warning">Подробнее</a>
+          <a href="{{ product.get_absolute_url }}" class="btn btn-warning">Подробнее</a>
         </div>
       </div>
       {% endfor %}

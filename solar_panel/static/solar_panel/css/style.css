@@ -459,4 +459,17 @@ input[type=range]::-ms-thumb {
     background-color: #fdbe34;
     border-radius: .25rem;
 }
+
+@media (max-width: 576px) {
+    .desc {
+        margin-top: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .desc h2 {
+        font-size: calc(1.275rem + .3vw)
+    }
+}
+
 /*end single product*/

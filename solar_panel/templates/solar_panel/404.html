@@ -1,0 +1,21 @@
+{% extends 'solar_panel/base.html' %}
+{% load static %}
+
+{% block title %}
+  {{ title }}
+{% endblock %}
+
+{% block main %}
+  <section class="container error404">
+    <div class="row justify-content-center">
+      <div class="col-md-8 text-center">
+        <h1 class="mt-4">404</h1>
+        <h3>Страница не найдена!</h3>
+        <p>Возможно, эта страница была удалена либо допущена ошибка в адресе!</p>
+        <p><a href="{% url 'home' %}">На главную страницу</a></p>
+      </div>
+    </div>
+  </section>
+  {% include 'solar_panel/include/form.html' %}
+  {% include 'solar_panel/include/benefits.html' %}
+{% endblock %}

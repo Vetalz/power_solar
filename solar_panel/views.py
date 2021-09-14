@@ -1,3 +1,4 @@
+from django.http import HttpResponseNotFound
 from django.shortcuts import render, get_object_or_404
 from .models import Product, Clients
 from .forms import ClientsForm
@@ -83,6 +84,16 @@ def green_rate(request):
         'form': form
     }
     return render(request, 'solar_panel/green_rate.html', context)
+
+
+def error404(request, exception):
+    anchor, form = req_form(request)
+    context = {
+        'title': 'Страница не найдена',
+        'anchor': anchor,
+        'form': form
+    }
+    return render(request, 'solar_panel/404.html', context, status=404)
 
 
 def req_form(request):

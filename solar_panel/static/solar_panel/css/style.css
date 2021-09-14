@@ -475,5 +475,13 @@ input[type=range]::-ms-thumb {
         font-size: calc(1.275rem + .3vw)
     }
 }
-
 /*end single product*/
+/*404*/
+.error404 h1{
+    color: red
+}
+
+.error404 a{
+    color: #4a8e35;
+}
+/*end 404*/

@@ -7,6 +7,7 @@ class ClientsForm(forms.ModelForm):
         model = Clients
         fields = ['name', 'phone_number']
         widgets = {
-            'name': forms.TextInput(attrs={'placeholder': 'Ваше имя', 'class': 'form-control mb-3'}),
-            'phone_number': forms.TextInput(attrs={'placeholder': 'Ваш номер телефона', 'class': 'form-control mb-3'}),
+            'name': forms.TextInput(attrs={'placeholder': 'Ваше имя', 'class': 'form-control mb-3', 'id': 'form_name'}),
+            'phone_number': forms.TextInput(attrs={'placeholder': 'Ваш номер телефона', 'class': 'form-control mb-3',
+                                                   'id': 'form_phone'}),
         }

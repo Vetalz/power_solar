@@ -1,5 +1,5 @@
 {% load static %}
-<section class="container-fluid form-bg pt-5">
+<section class="container-fluid form-bg pt-5" id="2">
     <div class="container">
       <div class="row justify-content-center mb-3">
         <div class="col-md-7 text-center">
@@ -9,9 +9,18 @@
       </div>
       <div class="row justify-content-center mb-5">
         <div class="col-md-5">
-          <form action="#">
-              <input type="text" class="form-control mb-3" placeholder="Выше имя">
-              <input type="text" class="form-control mb-3" placeholder="Ваш номер телефона">
+          <form method="post" id="form_2">
+              {% csrf_token %}
+              {{ form.name }}
+              {{ form.phone_number }}
+              {% if messages %}
+                <ul class="messages">
+                  {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+              <input type="hidden" name="form_number" value="2">
               <button type="submit" class="form-control submit py-2 mb-5">Оставить заявку</button>
           </form>
         </div>

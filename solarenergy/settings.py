@@ -134,3 +134,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+
+EMAIL_TARGET = [os.getenv('EMAIL_TARGET_1')]
+# EMAIL_TARGET = [os.getenv('EMAIL_TARGET_1'), os.getenv('EMAIL_TARGET_2'), os.getenv('EMAIL_TARGET_3')]

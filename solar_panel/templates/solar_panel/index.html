@@ -15,10 +15,18 @@
             <h1>Солнечные электростанции <br>для дома и бизнеса</h1>
           </div>
           <div class="text-center d-flex justify-content-center ">
-            <form action="#" class="mb-5 form-main p-3">
+            <form method="post" class="mb-5 form-main p-3" id="form_1">
               <p>Бесплатная консультация прямо сейчас!</p>
-              <input type="text" class="form-control mb-3" placeholder="Выше имя">
-              <input type="text" class="form-control mb-3" placeholder="Ваш номер телефона">
+              {% csrf_token %}
+              {{ form.name }}
+              {{ form.phone_number }}
+              {% if messages %}
+                <ul class="messages">
+                  {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
               <button type="submit" class="form-control py-2 btn btn-warning">Оставить заявку</button>
             </form>
           </div>

@@ -134,6 +134,10 @@ a.navbar-brand:hover {
     color: #fff;
 }
 
+.messages li {
+    list-style-type: none;
+}
+
 .green {
     color: #4a8e35;
 }

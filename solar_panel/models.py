@@ -36,3 +36,15 @@ class Product(models.Model):
     class Meta:
         verbose_name = 'СЭС'
         verbose_name_plural = 'СЭС'
+
+
+class Clients(models.Model):
+    name = models.CharField(max_length=150, verbose_name='Имя')
+    phone_number = models.CharField(max_length=15, verbose_name='Номер телефона')
+
+    def __str__(self):
+        return self.phone_number
+
+    class Meta:
+        verbose_name = 'Клиент'
+        verbose_name_plural = 'Клиенты'

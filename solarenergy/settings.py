@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'solar_panel.apps.SolarPanelConfig',
+    'django.contrib.sitemaps'
 ]
 
 MIDDLEWARE = [

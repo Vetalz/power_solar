@@ -18,10 +18,18 @@ from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
 from solar_panel.views import *
+from django.contrib.sitemaps.views import sitemap
+from solar_panel.sitemaps import StaticViewSitemap, ProductSitemap
+
+sitemaps = {
+    'static': StaticViewSitemap,
+    'products': ProductSitemap
+}
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('solar_panel.urls')),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps})
 ]
 
 handler404 = error404

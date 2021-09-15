@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+import credential
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,12 +22,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = credential.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DEBUG")
+DEBUG = credential.DEBUG
 
-ALLOWED_HOSTS = [os.getenv("DJANGO_ALLOWED_HOSTS")]
+ALLOWED_HOSTS = [credential.DJANGO_ALLOWED_HOSTS]
 
 
 # Application definition
@@ -79,11 +80,11 @@ WSGI_APPLICATION = 'solarenergy.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.getenv("POSTGRES_DB"),
-        'USER': os.getenv("POSTGRES_USER"),
-        'PASSWORD': os.getenv("POSTGRES_PASSWORD"),
-        'HOST': os.getenv("POSTGRES_HOST"),
-        'PORT': os.getenv("POSTGRES_PORT"),
+        'NAME': credential.POSTGRES_DB,
+        'USER': credential.POSTGRES_USER,
+        'PASSWORD': credential.POSTGRES_PASSWORD,
+        'HOST': credential.POSTGRES_HOST,
+        'PORT': credential.POSTGRES_PORT,
     }
 }
 
@@ -139,10 +140,10 @@ MEDIA_URL = '/media/'
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 465
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = credential.EMAIL_HOST_USER
+EMAIL_HOST_PASSWORD = credential.EMAIL_HOST_PASSWORD
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 
 # EMAIL_TARGET = [os.getenv('EMAIL_TARGET_1')]
-EMAIL_TARGET = [os.getenv('EMAIL_TARGET_1'), os.getenv('EMAIL_TARGET_2')]
+EMAIL_TARGET = [credential.EMAIL_TARGET_1, credential.EMAIL_TARGET_2]

@@ -21,12 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-)!rywz75z$sg^9e2l&8@xc#f#s+3u=x^%i4_3a&omyxp!#jgek'
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DEBUG")
 
-ALLOWED_HOSTS = ['192.168.0.104']
+ALLOWED_HOSTS = [os.getenv("DJANGO_ALLOWED_HOSTS")]
 
 
 # Application definition
@@ -79,13 +79,14 @@ WSGI_APPLICATION = 'solarenergy.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': f'{os.getenv("POSTGRES_DB")}',
-        'USER': f'{os.getenv("POSTGRES_USER")}',
-        'PASSWORD': f'{os.getenv("POSTGRES_PASSWORD")}',
-        'HOST': '127.0.0.1',
-        'PORT': f'{os.getenv("PORT_DB")}',
+        'NAME': os.getenv("POSTGRES_DB"),
+        'USER': os.getenv("POSTGRES_USER"),
+        'PASSWORD': os.getenv("POSTGRES_PASSWORD"),
+        'HOST': os.getenv("POSTGRES_HOST"),
+        'PORT': os.getenv("POSTGRES_PORT"),
     }
 }
+
 
 
 # Password validation
@@ -143,5 +144,5 @@ EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 
-EMAIL_TARGET = [os.getenv('EMAIL_TARGET_1')]
-# EMAIL_TARGET = [os.getenv('EMAIL_TARGET_1'), os.getenv('EMAIL_TARGET_2'), os.getenv('EMAIL_TARGET_3')]
+# EMAIL_TARGET = [os.getenv('EMAIL_TARGET_1')]
+EMAIL_TARGET = [os.getenv('EMAIL_TARGET_1'), os.getenv('EMAIL_TARGET_2')]

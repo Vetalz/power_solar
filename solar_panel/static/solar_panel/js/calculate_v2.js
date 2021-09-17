@@ -36,8 +36,7 @@ const price_additional = 700;
 const price_assembly = 4900;
 const tax = 0.195;
 
-let budget = 10000;
-let power;
+let power = 10;
 let count_panel;
 let square_station;
 let generation_panel;
@@ -45,6 +44,7 @@ let generation_year;
 let profit;
 let profit_tax;
 let payback;
+let text;
 
 let region;
 
@@ -53,20 +53,18 @@ document.getElementById("region").addEventListener("change", function() {
   calculate();
 });
 
-document.getElementById("budget_value").addEventListener("change", function() {
-  budget = this.value;
+document.getElementById("power_value").addEventListener("change", function() {
+  power = this.value;
   calculate();
 });
 
 document.getElementById("range_value").addEventListener("change", function() {
-  budget = this.value;
+  power = this.value;
   calculate();
 });
 
 function calculate() {
-  count_panel = Math.ceil((budget - price_inverter - price_additional - price_assembly)
-      / (price_panel + price_fastening))
-  power = Math.round(count_panel * power_panel)
+  count_panel = Math.ceil(power / power_panel)
   square_station = Math.round(count_panel * square_panel)
   generation_panel = power_panel * count_panel;
   generation_year = region_kof[region] * generation_panel
@@ -86,17 +84,19 @@ function calculate() {
     payback = 0;
   }
 
-  if (power > 40) {
-    document.getElementsByClassName("calc_warning")[0].style.display= 'block';
+  if (payback >= 5) {
+    text = ' лет'
   }
   else {
-    document.getElementsByClassName("calc_warning")[0].style.display= 'none';
+    text = ' года'
   }
+
 
   document.getElementById("power").innerHTML = power;
   document.getElementById("count_panel").innerHTML = count_panel;
   document.getElementById("square_station").innerHTML = square_station;
   document.getElementById("generation_year").innerHTML = generation_year.toFixed(2);
   document.getElementById("profit").innerHTML = profit_tax.toFixed(2);
-  document.getElementById("payback").innerHTML = payback.toFixed(2);
+  document.getElementById("payback").innerHTML = payback.toFixed(1);
+  document.getElementById("period").innerHTML = text;
 }

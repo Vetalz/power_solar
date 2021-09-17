@@ -317,6 +317,7 @@ input[type=range]::-ms-thumb {
 
 .calc {
   color: #4a8e35;
+  font-size: 20px;
 }
 
 .calc_warning {

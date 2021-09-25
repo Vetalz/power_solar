@@ -77,7 +77,7 @@
           <li class="nav-item"><a href="{% url 'home' %}#service" class="nav-link btn-request" data-goto=".service">Услуги</a></li>
           <li class="nav-item {% if title == 'Наши проекты' %}active {% endif %}"><a href="{% url 'product' %}" class="nav-link">Наши проекты</a></li>
 <!--          <li class="nav-item"><a href="#" class="nav-link">Оборудование</a></li>-->
-          <li class="nav-item"><a href="{%url 'green_rate' %}" class="nav-link">Зелёный тариф</a></li>
+          <li class="nav-item {% if title == 'Зелёный тариф' %}active {% endif %}"><a href="{%url 'green_rate' %}" class="nav-link">Зелёный тариф</a></li>
           <li class="nav-item {% if title == 'Контакты' %}active {% endif %}"><a href="{% url 'contact' %}" class="nav-link">Контакты</a></li>
         </ul>
       </div>

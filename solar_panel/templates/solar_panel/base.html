@@ -76,7 +76,7 @@
           <li class="nav-item {% if title == 'Главная' %}active {% endif %}"><a href="{% url 'home' %}" class="nav-link">Главная</a></li>
           <li class="nav-item"><a href="{% url 'home' %}#service" class="nav-link btn-request" data-goto=".service">Услуги</a></li>
           <li class="nav-item {% if title == 'Наши проекты' %}active {% endif %}"><a href="{% url 'product' %}" class="nav-link">Наши проекты</a></li>
-<!--          <li class="nav-item"><a href="#" class="nav-link">Оборудование</a></li>-->
+          <li class="nav-item"><a href="{% url 'equipment' %}" class="nav-link">Оборудование</a></li>
           <li class="nav-item {% if title == 'Зелёный тариф' %}active {% endif %}"><a href="{%url 'green_rate' %}" class="nav-link">Зелёный тариф</a></li>
           <li class="nav-item {% if title == 'Контакты' %}active {% endif %}"><a href="{% url 'contact' %}" class="nav-link">Контакты</a></li>
         </ul>
@@ -136,5 +136,6 @@
   {% endblock %}
   <script src="{% static 'solar_panel/js/scroll.js' %}"></script>
   <script src="{% static 'solar_panel/js/slick_slider.js' %}"></script>
+  <script src="{% static 'solar_panel/js/cart.js' %}"></script>
 </body>
 </html>

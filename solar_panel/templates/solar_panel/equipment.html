@@ -1,0 +1,83 @@
+{% extends 'solar_panel/base.html' %}
+{% load static %}
+
+{% block title %}
+  {{ title }}
+{% endblock %}
+
+{% block main %}
+<div class="container-fluid contact_screen">
+    <div class="container catalog">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'home' %}">Главная</a></li>
+          <li class="breadcrumb-item active-crumb" aria-current="page">Оборудование</li>
+        </ol>
+      </nav>
+      <h1>Оборудование</h1>
+      <div>
+        <a href="{% url 'cart' %}">
+          <div class="cart icon text-center">
+            <i class="fi fi-shopping-basket"></i>
+            <span class="cart-qty" id="cart">0</span>
+          </div>
+        </a>
+      </div>
+    </div>
+</div>
+<section class="container mt-5 mb-5">
+    <div class="row justify-content-around">
+      {% for category in categories %}
+        {% for panel in category.panels.all %}
+          <div class="card mt-3 text-center">
+            <a href="{{ panel.get_absolute_url }}">
+              <img src="{{ panel.image.photo.url }}" class="card-img-top" alt="{{ panel.name }}" id="{{ panel.id }}_image_{{ panel.category.pk }}">
+            </a>
+            <div class="card-body">
+              <h5 class="card-title" id="{{ panel.id }}_name_{{ panel.category.pk }}">
+                <a href="{{ panel.get_absolute_url }}" class="equipment-link" id="{{ panel.id }}_url_{{ panel.category.pk }}">{{ panel.name }}</a>
+              </h5>
+              {% if panel.name|length <= 20 %}
+                <br>
+              {% endif %}
+              <p class="card-text price"><span id="{{ panel.id }}_price_{{ panel.category.pk }}">{{ panel.price }}</span> грн</p>
+              <div class="d-flex justify-content-center amount mb-4">
+                <button class="btn btn-warning plus-minus" value="-" onclick="qty_down('{{ panel.id }}_qty_{{ panel.category.pk }}')">-</button>
+                <input type="number" class="qty form-control ms-2" min="1" max="999" value="1" id="{{ panel.id }}_qty_{{ panel.category.pk }}">
+                <button class="btn btn-warning plus-minus" value="+" onclick="qty_up('{{ panel.id }}_qty_{{ panel.category.pk }}')">+</button>
+              </div>
+              <button class="add_cart btn btn-warning px-4 py-2 mb-2" id="{{ panel.id }}_addcart_{{ panel.category.pk }}"
+                               onClick="add_cart(this.id, {{ panel.category.pk }})">Добавить в корзину</button>
+            </div>
+          </div>
+        {% endfor %}
+        {% for inverter in category.inverters.all %}
+          <div class="card mt-3 text-center">
+            <a href="{{ inverter.get_absolute_url }}">
+              <img src="{{ inverter.image.photo.url }}" class="card-img-top" alt="{{ inverter.name }}" id="{{ inverter.id }}_image_{{ inverter.category.pk }}">
+            </a>
+            <div class="card-body">
+              <h5 class="card-title" id="{{ inverter.id }}_name_{{ inverter.category.pk }}">
+                <a href="{{ inverter.get_absolute_url }}" class="equipment-link" id="{{ inverter.id }}_url_{{ inverter.category.pk }}">{{ inverter.name }}</a>
+              </h5>
+              {% if inverter.name|length <= 20 %}
+                <br>
+              {% endif %}
+              <p class="card-text price"><span id="{{ inverter.id }}_price_{{ inverter.category.pk }}">{{ inverter.price }}</span> грн</p>
+              <div class="d-flex justify-content-center amount mb-4">
+                <button class="btn btn-warning plus-minus" value="-" onclick="qty_down('{{ inverter.id }}_qty_{{ inverter.category.pk }}')">-</button>
+                <input type="number" class="qty form-control ms-2" min="1" max="999" value="1" id="{{ inverter.id }}_qty_{{ inverter.category.pk }}">
+                <button class="btn btn-warning plus-minus" value="+" onclick="qty_up('{{ inverter.id }}_qty_{{ inverter.category.pk }}')">+</button>
+              </div>
+              <button class="add_cart btn btn-warning px-4 py-2 mb-2" id="{{ inverter.id }}_addcart_{{ inverter.category.pk }}"
+                               onClick="add_cart(this.id, {{ inverter.category.pk }})">Добавить в корзину</button>
+            </div>
+          </div>
+        {% endfor %}
+      {% endfor %}
+    </div>
+</section>
+
+{% include 'solar_panel/include/form.html' %}
+{% include 'solar_panel/include/benefits.html' %}
+{% endblock %}

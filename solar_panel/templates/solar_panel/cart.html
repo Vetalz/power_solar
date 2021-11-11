@@ -1,0 +1,41 @@
+{% extends 'solar_panel/base.html' %}
+{% load static %}
+
+{% block title %}
+  {{ title }}
+{% endblock %}
+
+{% block main %}
+    <div class="container-fluid contact_screen">
+    <div class="container catalog">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'home' %}">Главная</a></li>
+          <li class="breadcrumb-item"><a href="{% url 'equipment' %}">Оборудование</a></li>
+          <li class="breadcrumb-item active-crumb" aria-current="page">Корзина</li>
+        </ol>
+      </nav>
+      <h1>Ваш заказ</h1>
+
+    </div>
+  </div>
+  <section class="container mt-5 mb-5">
+    <div class="row">
+      <div class="empty">
+        <h2>В корзине нет товаров</h2>
+        <div class="text-center mt-5 mb-5">
+          <a href="{% url 'equipment' %}" class="btn btn-warning">Начать покупки</a>
+        </div>
+      </div>
+      <div id="cart_equipment">
+
+      </div>
+    </div>
+    <div class="row empty hidden">
+      <h3 class="text-end mt-3 total">Итого: <span id="total">0</span> грн</h3>
+    </div>
+    <div class="row">
+
+    </div>
+  </section>
+{% endblock %}

@@ -1,6 +1,6 @@
 from django.http import HttpResponseNotFound
 from django.shortcuts import render, get_object_or_404
-from .models import Product, Clients
+from .models import Product, Category, Panel, Inverter
 from .forms import ClientsForm
 from django.contrib import messages
 from django.template.loader import render_to_string
@@ -119,3 +119,47 @@ def req_form(request):
     else:
         form = ClientsForm()
     return anchor, form
+
+
+def equipment(request):
+    anchor, form = req_form(request)
+    categories = Category.objects.all()
+    context = {
+        'title': 'Оборудование',
+        'anchor': anchor,
+        'form': form,
+        'categories': categories,
+
+    }
+    return render(request, 'solar_panel/equipment.html', context)
+
+
+def single_panel(request, slug):
+    anchor, form = req_form(request)
+    item = get_object_or_404(Panel, slug=slug)
+    context = {
+        'equipment': item,
+        'title': item.name,
+        'anchor': anchor,
+        'form': form
+    }
+    return render(request, 'solar_panel/single_equipment.html', context)
+
+
+def single_inverter(request, slug):
+    anchor, form = req_form(request)
+    item = get_object_or_404(Inverter, slug=slug)
+    context = {
+        'equipment': item,
+        'title': item.name,
+        'anchor': anchor,
+        'form': form
+    }
+    return render(request, 'solar_panel/single_equipment.html', context)
+
+
+def cart(request):
+    context = {
+        'title': 'Ваш заказ',
+    }
+    return render(request, 'solar_panel/cart.html', context)

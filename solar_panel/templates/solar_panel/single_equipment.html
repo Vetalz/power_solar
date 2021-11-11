@@ -1,0 +1,94 @@
+{% extends 'solar_panel/base.html' %}
+{% load static %}
+
+{% block title %}
+  {{ title }}
+{% endblock %}
+
+{% block main %}
+  <div class="container-fluid contact_screen">
+    <div class="container catalog">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'home' %}">Главная</a></li>
+          <li class="breadcrumb-item"><a href="{% url 'equipment' %}">Оборудование</a></li>
+          <li class="breadcrumb-item active-crumb" aria-current="page">{{ equipment.name }}</li>
+        </ol>
+      </nav>
+      <h1 id="{{ equipment.id }}_name_{{ equipment.category.pk }}">
+        <a href="{{ equipment.get_absolute_url }}" class="equipment-link-v2"
+           id="{{ equipment.id }}_url_{{ equipment.category.pk }}">{{ equipment.name }}</a>
+      </h1>
+      <div>
+        <a href="{% url 'cart' %}">
+          <div class="cart icon text-center">
+            <i class="fi fi-shopping-basket"></i>
+            <span class="cart-qty" id="cart">0</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <section class="container mt-5 mb-5">
+    <div class="row">
+      <div class="col-md-6">
+        <img src="{{ equipment.image.photo.url }}" alt="{{ equipment.name }}" class="equipment-img" id="{{ equipment.id }}_image_{{ equipment.category.pk }}">
+      </div>
+      <div class="col-md-1"></div>
+      <div class="col-md-4 desc">
+        <p class="mb-4"><span id="{{ equipment.id }}_price_{{ equipment.category.pk }}" class="single-price">{{ equipment.price }}</span> грн</p>
+        <div class="d-flex justify-content-between">
+        <div class="d-flex mb-4">
+          <button class="btn btn-warning plus-minus" value="-" onclick="qty_down('{{ equipment.id }}_qty_{{ equipment.category.pk }}')">-</button>
+          <input type="number" class="qty form-control ms-2" min="1" max="999" value="1" id="{{ equipment.id }}_qty_{{ equipment.category.pk }}">
+          <button class="btn btn-warning plus-minus" value="+" onclick="qty_up('{{ equipment.id }}_qty_{{ equipment.category.pk }}')">+</button>
+        </div>
+        <button class="add_cart btn btn-warning mx-2 mb-4" id="{{ equipment.id }}_addcart_{{ equipment.category.pk }}"
+                               onClick="add_cart(this.id, {{ equipment.category.pk }})">Добавить в корзину</button>
+        </div>
+        <h5>Характеристики:</h5>
+        <p><span class="feature">Производитель:  </span>{{ equipment.maker }}</p>
+        <p><span class="feature">Страна производитель:  </span>{{ equipment.country }}</p>
+        {% if equipment.type_panel %}
+          <p><span class="feature">Тип панели:  </span>{{ equipment.type_panel }}</p>
+        {% endif %}
+        {% if equipment.material %}
+        <p><span class="feature">Материал модуля:  </span>{{ equipment.material }}</p>
+        {% endif %}
+        <p><span class="feature">Номинальная мощность:  </span>{{ equipment.power }}
+          {% if equipment.max_power %}к{% endif %}Вт</p>
+        {% if equipment.max_power %}
+        <p><span class="feature">Максимальная выходная мощность:  </span>{{ equipment.max_power }}кВт</p>
+        {% endif %}
+        {% if equipment.mppt %}
+        <p><span class="feature">Количество МРРТ:  </span>{{ equipment.mppt }}</p>
+        {% endif %}
+        {% if equipment.dc_out %}
+        <p><span class="feature">Количество DC выходов:  </span>{{ equipment.dc_out }}</p>
+        {% endif %}
+        <p><span class="feature">Максимальный КПД:  </span>{{ equipment.max_efficiency }}%</p>
+        <p><span class="feature">Габариты:  </span>{{ equipment.length }} x {{ equipment.width }} x {{ equipment.thick }}</p>
+        <p>
+          <span class="feature">Спецификации:  </span>
+          <i class="fi fi-file-2"></i>
+          <a href="{{ equipment.data_sheet.url }}" target="_blank" class="data-sheet-link">{{ equipment.name }}.pdf</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  <section class="container mt-5 mb-5">
+    <div class="row">
+      <div class="text-center">
+          <span class="subheading"></span>
+          <h5 class="mb-4">Описание</h5>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-9">
+        <p>{{ equipment.description }}</p>
+      </div>
+    </div>
+  </section>
+  {% include 'solar_panel/include/form.html' %}
+  {% include 'solar_panel/include/benefits.html' %}
+{% endblock %}

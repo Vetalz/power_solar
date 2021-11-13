@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Photo, Product, Clients, Panel, Inverter, Category
+from .models import Photo, Product, Clients, Panel, Inverter, Category, Order
 
 
 class PhotoAdmin(admin.ModelAdmin):
@@ -35,11 +35,16 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'name')
 
 
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ('id', 'phone', 'price')
+
+
 admin.site.register(Photo, PhotoAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Clients, ClientAdmin)
 admin.site.register(Panel, PanelAdmin)
 admin.site.register(Inverter, InverterAdmin)
 admin.site.register(Category, CategoryAdmin)
+admin.site.register(Order, OrderAdmin)
 
 admin.site.site_header = 'SolarEnergy'

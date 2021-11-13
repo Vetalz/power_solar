@@ -1,7 +1,9 @@
+import json
+
 from django.http import HttpResponseNotFound
 from django.shortcuts import render, get_object_or_404
-from .models import Product, Category, Panel, Inverter
-from .forms import ClientsForm
+from .models import Product, Category, Panel, Inverter, DELIVERY_CHOICES, REGION_CHOICES, PAYMENT_CHOICES
+from .forms import ClientsForm, OrderForm
 from django.contrib import messages
 from django.template.loader import render_to_string
 from django.core.mail import send_mail
@@ -159,7 +161,58 @@ def single_inverter(request, slug):
 
 
 def cart(request):
+    form = order_form(request)
     context = {
         'title': 'Ваш заказ',
+        'form': form
     }
     return render(request, 'solar_panel/cart.html', context)
+
+
+def order_form(request):
+    if request.method == 'POST':
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Заказ успешно оформлен. Наш менеджер свяжется с Вами')
+            form = OrderForm()
+            name = request.POST.get('name')
+            phone = request.POST.get('phone')
+            text = f'Имя: {name}\nТелефон: {phone}'
+            delivery = request.POST.get('method_delivery')
+            region = request.POST.get('region')
+            payment = request.POST.get('method_payment')
+
+            for i in DELIVERY_CHOICES:
+                if i[0] == delivery:
+                    delivery = i[1]
+            for i in REGION_CHOICES:
+                if i[0] == region:
+                    region = i[1]
+            for i in PAYMENT_CHOICES:
+                if i[0] == payment:
+                    payment = i[1]
+
+            context = {
+                'title': 'SolarFuture.',
+                'name': name,
+                'phone': phone,
+                'delivery': delivery,
+                'region': region,
+                'city': request.POST.get('city'),
+                'new_post_office': request.POST.get('new_post_office'),
+                'address': request.POST.get('address'),
+                'comment': request.POST.get('comment'),
+                'method_payment': payment,
+                'product': json.loads(request.POST.get('product'))
+            }
+
+            email_html = render_to_string('solar_panel/email2.html', context)
+            send_mail('💲Потенциальный клиент💲', text, settings.EMAIL_HOST_USER, settings.EMAIL_TARGET,
+                      html_message=email_html)
+        else:
+            messages.error(request, 'Данные не отправлены')
+    else:
+        form = OrderForm()
+    return form
+

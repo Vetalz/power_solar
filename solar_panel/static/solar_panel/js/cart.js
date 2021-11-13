@@ -1,3 +1,13 @@
+let phone_mask = document.getElementById('input-phone');
+let mask_option = {
+    mask: '+{38}(000)000-00-00',
+    lazy: false,
+    placeholderChar: '_'
+  };
+if (phone_mask){
+    let mask = IMask(phone_mask, mask_option)
+}
+
 function qty_up(id) {
     let input_qty = document.getElementById(id);
     let prev_value = parseInt(input_qty.value);
@@ -89,10 +99,17 @@ document.addEventListener("DOMContentLoaded", (event)=>{
     if (all_equipments){
         let cart_qty = all_equipments.length
         let span_cart = document.getElementById('cart')
-        span_cart.innerHTML = cart_qty
+        if (span_cart){
+            span_cart.innerHTML = cart_qty
+        }
     }
 })
 
+
+let msg = document.getElementById('msg');
+if (msg){
+    localStorage.clear();
+}
 let cart_equipment = document.getElementById('cart_equipment')
 
 if(cart_equipment){
@@ -108,6 +125,7 @@ if(cart_equipment){
             render(all_equipment[i])
         }
     }
+    update_input_equipment(all_equipment)
 }
 
 function render(equipment) {
@@ -238,6 +256,7 @@ function update_product(product_id, qty){
         }
     }
     localStorage.setItem('equipments', JSON.stringify(new_all_products));
+    update_input_equipment(new_all_products)
 }
 
 function del_product(product_id) {
@@ -266,6 +285,7 @@ function del_product(product_id) {
 
     check_items(new_all_products);
     localStorage.setItem('equipments', JSON.stringify(new_all_products));
+    update_input_equipment(new_all_products)
 }
 
 function check_items(products) {
@@ -276,4 +296,31 @@ function check_items(products) {
             empty_cart[item].classList.toggle('hidden')
         }
     }
+}
+
+function update_input_equipment(products) {
+    let input_equipment = document.getElementById('input-equipment')
+    input_equipment.value = JSON.stringify(products)
+}
+
+
+// check delivery
+let methodNewPost = document.getElementById('method_delivery_1');
+let methodSelfPickup = document.getElementById('method_delivery_2');
+
+let region = document.getElementById('input-region');
+let city = document.getElementById('input-city');
+let new_post_office = document.getElementById('input-new_post');
+let address = document.getElementById('input-address');
+
+if (methodNewPost){
+    methodNewPost.addEventListener("click", onclick1);
+    methodSelfPickup.addEventListener("click", onclick1);
+}
+
+function onclick1(e){
+    region.classList.toggle('hidden');
+    city.classList.toggle('hidden');
+    new_post_office.classList.toggle('hidden');
+    address.classList.toggle('hidden');
 }

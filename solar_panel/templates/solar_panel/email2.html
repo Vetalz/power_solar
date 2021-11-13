@@ -82,6 +82,7 @@
   td, div {
     font-family: Helvetica, Arial, sans-serif;
     text-align: center;
+    padding: 15px;
   }
 
   p, ul {
@@ -409,6 +410,13 @@
                       <td class="status-cell" width="100px"><b>{% calc_price i.price i.qty %}грн</b></td>
                     </tr>
                     {% endfor %}
+                    <tr>
+                      <td class="status-cell"></td>
+                      <td class="status-cell"></td>
+                      <td class="status-cell"></td>
+                      <td class="status-cell"></td>
+                      <td class="status-cell"><b>{{ total_price }}грн</b></td>
+                    </tr>
                   </table>
                   <br>
                   <br>

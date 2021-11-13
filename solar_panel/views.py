@@ -173,15 +173,19 @@ def order_form(request):
     if request.method == 'POST':
         form = OrderForm(request.POST)
         if form.is_valid():
-            form.save()
+            instance = form.save(commit=False)
             messages.success(request, 'Заказ успешно оформлен. Наш менеджер свяжется с Вами')
             form = OrderForm()
+
             name = request.POST.get('name')
             phone = request.POST.get('phone')
             text = f'Имя: {name}\nТелефон: {phone}'
             delivery = request.POST.get('method_delivery')
             region = request.POST.get('region')
             payment = request.POST.get('method_payment')
+            prod = json.loads(request.POST.get('product'))
+            total_price = get_total_price(prod)
+            instance.price = total_price
 
             for i in DELIVERY_CHOICES:
                 if i[0] == delivery:
@@ -204,15 +208,24 @@ def order_form(request):
                 'address': request.POST.get('address'),
                 'comment': request.POST.get('comment'),
                 'method_payment': payment,
-                'product': json.loads(request.POST.get('product'))
+                'product': prod,
+                'total_price': total_price
             }
 
             email_html = render_to_string('solar_panel/email2.html', context)
             send_mail('💲Потенциальный клиент💲', text, settings.EMAIL_HOST_USER, settings.EMAIL_TARGET,
                       html_message=email_html)
+            instance.save()
         else:
             messages.error(request, 'Данные не отправлены')
     else:
         form = OrderForm()
     return form
 
+
+def get_total_price(produce):
+    total_price = 0
+    for i in produce:
+        price = i['price'] * i['qty']
+        total_price += price
+    return total_price
